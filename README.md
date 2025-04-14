@@ -55,6 +55,8 @@ Check out the full capabilities of the mc client commands here: https://min.io/d
 The S3 API is an HTTP-based API for interacting with storage, and follows REST (Representational State Transfer) principles. The API uses standard HTTP methods such as GET, PUT, POST and DELETE.
 The authorization mechanism supported is AWS4-HMAC-SHA256.
 
+![AWS_SIG_V4](https://docs.aws.amazon.com/images/AmazonS3/latest/API/images/sigV4-using-query-params.png AWS_SIG_V4)
+
 
 
 
