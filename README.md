@@ -7,7 +7,7 @@ This project provides a hands-on environment to learn how S3 object storage work
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Run MinIO via Docker
 
@@ -69,6 +69,122 @@ cd S3-python-test
 pip install boto3`
 python put-to-s3.py
 ```
+
+### 6. User and file management
+
+#### User identity and access management
+
+https://min.io/docs/minio/linux/administration/identity-access-management/minio-user-management.html
+
+A MinIO user consists of a unique access key (username) and corresponding secret key (password). Clients must authenticate their identity by specifying both a valid access key (username) and the corresponding secret key (password) of an existing MinIO user.
+
+Each user can have one or more assigned policies that explicitly list the actions and resources to which that user has access. Users can also inherit policies from the groups in which they have membership. MinIO by default denies access to all actions or resources not explicitly allowed by a user’s assigned or inherited policies. 
+
+- Create a new user:
+
+```bash
+mc admin user add local newuser newpassword
+```
+
+- List existing users:
+
+```bash
+mc admin user list local
+```
+
+- Enable, disable, remove user
+
+```bash
+mc admin user enable local newuser
+mc admin user disable local newuser
+mc admin user remove local newuser
+```
+
+- view built-in policies
+
+```bash
+mc admin policy list local
+```
+
+- assign policy to a user
+```bash
+mc admin policy set local readwrite user=newuser
+```
+
+- Create a custom policy
+This policy allow "GetObject" S3 request only on "test" bucket
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": ["s3:GetObject"],
+      "Effect": "Allow",
+      "Resource": ["arn:aws:s3:::mybucket/*"]
+    }
+  ]
+}
+```
+
+Save this policy in a file `custom-policy.json` and apply it:
+
+```bash
+mc admin policy add local custom-policy custom-policy.json
+mc admin policy set local custom-policy user=newuser
+```
+
+A User can create "Access Key" to enable access to a subset of the actions and resources explicitly allowed for him. Access Keys automatically inherit permissions from the parent user by default. If the parent user belongs to any groups, and those groups have policies (like read-only, read-write), the Access Key will get those too. However, you can add an inline policy (a policy directly on the Access Key) that says. To get available policy conditions: https://min.io/docs/minio/linux/administration/identity-access-management/policy-based-access-control.html.
+
+The `mc admin accesskey` command and its subcommands create and manage Access Keys for internally managed users on a MinIO deployment. You can also create new access key through UI : http://localhost:9001/access-keys.
+
+#### File management
+
+MinIO supports S3-compatible lifecycle policies, which allow you to automatically manage the expiration of objects (files) based on age, prefix, or tags. This is useful for cleaning up old backups, temporary files, or logs without manual intervention.
+
+
+- Create a Lifecycle policy json file `lifecycle.json`
+
+``` json
+{
+  "Rules": [
+    {
+      "ID": "expire-temp-files",
+      "Status": "Enabled",
+      "Prefix": "",
+      "Expiration": {
+        "Days": 1
+      }
+    }
+  ]
+}
+```
+
+- Apply the lifecycle policy to a bucket and check that the rule has been applied
+
+```bash
+mc ilm import local/test < lifecycle.json
+mc ilm export local/test
+```
+
+Another lifecycle policy using tag-based rule
+```bash
+mc ilm rule add local/test --expire-days 30 --tags "temporary30d=true"
+```
+
+#### Bucket versionning
+
+https://min.io/docs/minio/linux/administration/object-management/object-versioning.html
+
+
+
+
+
+
+
+
+
+
 
 
 
