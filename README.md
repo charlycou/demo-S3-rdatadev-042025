@@ -57,6 +57,15 @@ The authorization mechanism supported is AWS4-HMAC-SHA256.
 
 ![AWS_SIG_V4](https://docs.aws.amazon.com/images/AmazonS3/latest/API/images/sigV4-using-query-params.png)
 
+BUGGED AWS-SIG-V4 PutObject request in `./S3-API-curl-test`! 
+
+### 5. Interact with S3 API using Python client
+
+
+
+
+
+
 
 
 
