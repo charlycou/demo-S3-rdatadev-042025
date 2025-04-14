@@ -31,25 +31,30 @@ Add a MinIO alias called `local` to interact with the server running in docker.
 mc alias set local http://localhost:9000 minioadmin minioadmin
 ```
 
-### 3. Intéragir avec Minio
+### 3. Interact with Minio
 
-#### Créer un bucket et stocker des fichiers avec l'UI Minio
-Se logger sur l'UI : `http://localhost:9001` et créer un bucket puis uploader un fichier dans le bucket.
+#### Create a bucket and store files with Minio UI
+Loggin to MionIO UI : `http://localhost:9001` and create a bucket. Then upload a file in the bucket.
 
 
-#### Créer un bucket et stocker des fichiers avec le client Minio
-- Utiliser la commande `mc ls` pour lister le bucket créé.
-- Puis, utiliser la commande `mc mb` pour créer un nouveau bucket.
-- AJouter un nouveau fichier avec la commande `mc put`.
-- Jouer avec la commande `mc cp` pour copier un fichier, depuis un bucket vers le système local, depuis votre système local vers un bucket, entre deux buckets.
-- Supprimer un fichier avec la commande `mc rm`
-- Supprimer un bucket avec la commande `mc rb`
+#### Create a Bucket and Store Files with the MinIO Client
+- Use the mc ls command to list the created bucket.
+- Then, use the mc mb command to create a new bucket.
+- Add a new file with the mc put command.
+- Play around with the mc cp command to copy a file:
+    - from a bucket to your local system,
+    - from your local system to a bucket,
+    - or between two buckets.
+- Delete a file with the mc rm command.
+- Delete a bucket with the mc rb command.
 
-Regarder les possibilités qu'offre les commandes du client `mc`: https://min.io/docs/minio/linux/reference/minio-mc/mc-rm.html
+Check out the full capabilities of the mc client commands here: https://min.io/docs/minio/linux/reference/minio-mc/mc-rm.html
 
-### 4. L'API S3
+### 4. S3 (Simple Storage Service) API
 
-L'API S3 est une API basée sur HTTP pour interagir avec le stockage, et cette API suit les principes REST (Representational State Transfer). L'API utilise des méthodes HTTP standard telles que GET, PUT, POST et DELETE.
+The S3 API is an HTTP-based API for interacting with storage, and follows REST (Representational State Transfer) principles. The API uses standard HTTP methods such as GET, PUT, POST and DELETE.
+The authorization mechanism supported is AWS4-HMAC-SHA256.
+
 
 
 
