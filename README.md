@@ -58,8 +58,24 @@ The authorization mechanism supported is AWS4-HMAC-SHA256.
 ![AWS_SIG_V4](https://docs.aws.amazon.com/images/AmazonS3/latest/API/images/sigV4-using-query-params.png)
 
 BUGGED AWS-SIG-V4 PutObject request in `./S3-API-curl-test`! 
+Reférences: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html
 
 ### 5. Interact with S3 API using Python client
+
+Install dependencies in a virtual environement of your choice and run `put-to-s3.py` script.
+
+```bash
+cd S3-python-test
+pip install boto3`
+python put-to-s3.py
+```
+
+
+
+
+
+
+
 
 
 
