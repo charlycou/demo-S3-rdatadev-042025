@@ -176,6 +176,20 @@ mc ilm rule add local/test --expire-days 30 --tags "temporary30d=true"
 
 https://min.io/docs/minio/linux/administration/object-management/object-versioning.html
 
+### 7. Benefits of using "analysis-ready" file formats with S3
+
+**What are analysis-ready file formats?** These are formats optimized for querying, reading, and analysis, not just storage. (Parquet, ROC, Arrow, Zarr, COG...). Dessimate one of the major drawback of S3 storage which is the need of downloading the file locally to process it!
+
+Modern data tools (like DuckDB, Spark, Pandas, etc.) can query files directly on S3, without downloading the entire file first. These tools use HTTP Range Requests to fetch only the needed parts of a file stored remotely.
+
+> An HTTP Range request asks the server to send parts of a resource back to a client. Range requests are useful for various clients, including media players that support random access, data tools that require only part of a large file, and download managers that let users pause and resume a download.
+
+It is a way for client to is a way for clients to ask the server: "Please send me only the bytes from position 10,000 to 12,000 of this file."
+
+Benefits:
+- Save bandwidth (only transfer needed data).
+- Speed up analysis (skip irrelevant data).
+- Work efficiently over remote S3 URLs — no temp files needed.
 
 
 
