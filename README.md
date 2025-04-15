@@ -192,27 +192,24 @@ Benefits:
 - Work efficiently over remote S3 URLs — no temp files needed.
 
 
+### Read only a part of a parquet file (Column oriented format)
 
+Put `rain.gzip.parquet` file in a bucket and query only a subset of the file using python script `read-parquet-file-on-S3.py`.
 
+What is happening? 
+- PyArrow loads parquet file metadata via an HTTP Range Request (Parquet metadata are stored on a footer).
+- Then it fetches only the required row groups/columns.
+- You still need to filter timestamps in memory, but only the minimal subset is read.
 
+More info on Parquet (in French) : https://www.casd.eu/wp/wp-content/uploads/WebinaireParquet-DuckDB-CASD_20250204d.mp4
 
+### Read only a part of a Cloud-Optimized GeoTiff (COG)
 
+Query only a subset of a cloud-optimized geotiff using python script `read-cog-file-on-S3.py`.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+What is happening? 
+- rioxarray lazy load the raster file
+- Then it fetches only the required tiles according to the slice selected (Using HTTP Range Request again)
 
 
 
