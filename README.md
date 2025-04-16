@@ -1,5 +1,5 @@
 # demo-S3-rdatadev-042025
-Demo repository for hands-on session to get into object sotrage and S3
+Demo repository for hands-on session to get into object storage and S3
 
 # Learn S3 with MinIO 🪣
 
@@ -11,7 +11,7 @@ This project provides a hands-on environment to learn how S3 object storage work
 
 ### 1. Run MinIO via Docker
 
-Référence : https://min.io/docs/minio/container/index.html
+Reference : https://min.io/docs/minio/container/index.html
 
 Create local volume to mount the data locally and install Minio using docker inline or using Dockerfile.yml
 ````bash
@@ -39,7 +39,7 @@ docker compose -f ./Dockerfile.yml up
 
 ### 2. Install and configure MinIO client (mc)
 
-Intall `mc`
+Install `mc`
 
 ```bash
 curl -O https://dl.min.io/client/mc/release/linux-amd64/mc
@@ -56,19 +56,19 @@ mc alias set local http://localhost:9000 minioadmin minioadmin
 ### 3. Interact with Minio
 
 #### Create a bucket and store files with Minio UI
-Loggin to MionIO UI : `http://localhost:9001` and create a bucket. Then upload a file in the bucket.
+Loggin to MinIO UI : `http://localhost:9001` and create a bucket. Then upload a file in the bucket.
 
 
 #### Create a Bucket and Store Files with the MinIO Client
 - Use the `mc ls local` command to list the created bucket.
 - Then, use the `mc mb local/test` command to create a new bucket. "local" is the name of your alias in `mc` and "test" is the name of your bucket.
-- Add a new file with the mc put command.
+- Add a new file with the `mc put` command.
 - Download a file from your bucket using `mc get` command.
-- Play around with the mc cp command to copy a file:
+- Play around with the `mc cp` command to copy a file:
     - from your local system to a bucket,
     - or between two buckets.
-- Delete a file with the mc rm command.
-- Delete a bucket with the mc rb command.
+- Delete a file with the `mc rm` command.
+- Delete a bucket with the `mc  command.
 
 Check out the full capabilities of the mc client commands here: https://min.io/docs/minio/linux/reference/minio-mc/mc-rm.html
 
