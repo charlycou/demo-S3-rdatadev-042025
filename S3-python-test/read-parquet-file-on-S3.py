@@ -1,5 +1,14 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import fsspec
+from fsspec import AbstractFileSystem, filesystem
+
+import logging
+
+# Enable debug-level logging for fsspec
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger("fsspec")
+logger.setLevel(logging.DEBUG)
 
 # MinIO settings
 minio_endpoint = "http://localhost:9000"
@@ -24,7 +33,7 @@ end_time = pd.Timestamp("2005-07-19 00:00:00").timestamp()*1000  #1121724000000
 columns = ["dateEnd", "value"]
 
 # Read from Parquet over HTTP with lazy loading
-df = pd.read_parquet(
+dff = pd.read_parquet(
     file_path,
     engine="pyarrow",
     columns=columns,  # Optional: load only these columns
@@ -32,8 +41,20 @@ df = pd.read_parquet(
     filters=[("dateEnd",">",start_time),(("dateEnd"),"<",end_time)]
 )
 
+df = pd.read_parquet(
+    file_path,
+    engine="pyarrow",
+    storage_options=storage_options
+)
+
+
+
+print(dff.memory_usage(deep=True))
+print(df.memory_usage(deep=True))
+
+
 # ✅ Output result
-print(df.head())
-print(df.tail())
-df.plot(x='dateEnd')
-plt.show()
+print(dff.head())
+print(dff.tail())
+# dff.plot(x='dateEnd')
+# plt.show()
