@@ -18,6 +18,3 @@ subset = xds.rio.slice_xy(550000,1850000,560000,1855000)
 
 subset.astype("int").plot.imshow(rgb="band")
 plt.show()
-
-
-
