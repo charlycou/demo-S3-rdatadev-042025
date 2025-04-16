@@ -11,9 +11,31 @@ This project provides a hands-on environment to learn how S3 object storage work
 
 ### 1. Run MinIO via Docker
 
-```bash
-bash scripts/run-minio.sh
+Référence : https://min.io/docs/minio/container/index.html
+
+Create local volume to mount the data locally and install Minio using docker inline or using Dockerfile.yml
+````bash
+mkdir -p ~/minio/data
 ```
+
+```bash
+docker run \
+   -p 9000:9000 \
+   -p 9001:9001 \
+   --name minio \
+   -v ~/minio/data:/data \
+   -e "MINIO_ROOT_USER=minioadmin" \
+   -e "MINIO_ROOT_PASSWORD=minioadmin" \
+   quay.io/minio/minio server /data --console-address ":9001"
+```
+
+or
+
+```bash
+docker compose -f ./Dockerfile.yml up
+```
+
+
 
 ### 2. Install and configure MinIO client (mc)
 
