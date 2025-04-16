@@ -1,0 +1,5 @@
+boto3==1.37.34
+botocore==1.37.1
+matplotlib==3.10.1
+pandas==2.2.3
+rioxarray==0.18.2
