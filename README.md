@@ -60,11 +60,11 @@ Loggin to MionIO UI : `http://localhost:9001` and create a bucket. Then upload a
 
 
 #### Create a Bucket and Store Files with the MinIO Client
-- Use the mc ls command to list the created bucket.
-- Then, use the mc mb command to create a new bucket.
+- Use the `mc ls local` command to list the created bucket.
+- Then, use the `mc mb local/test` command to create a new bucket. "local" is the name of your alias in `mc` and "test" is the name of your bucket.
 - Add a new file with the mc put command.
+- Download a file from your bucket using `mc get` command.
 - Play around with the mc cp command to copy a file:
-    - from a bucket to your local system,
     - from your local system to a bucket,
     - or between two buckets.
 - Delete a file with the mc rm command.
@@ -130,7 +130,7 @@ mc admin policy list local
 
 - assign policy to a user
 ```bash
-mc admin policy set local readwrite user=newuser
+mc admin policy attach local readwrite --user newuser
 ```
 
 - Create a custom policy
@@ -152,8 +152,8 @@ This policy allow "GetObject" S3 request only on "test" bucket
 Save this policy in a file `custom-policy.json` and apply it:
 
 ```bash
-mc admin policy add local custom-policy custom-policy.json
-mc admin policy set local custom-policy user=newuser
+mc admin policy create local custom-policy custom-policy.json
+mc admin policy attach local custom-policy --user newuser
 ```
 
 A User can create "Access Key" to enable access to a subset of the actions and resources explicitly allowed for him. Access Keys automatically inherit permissions from the parent user by default. If the parent user belongs to any groups, and those groups have policies (like read-only, read-write), the Access Key will get those too. However, you can add an inline policy (a policy directly on the Access Key) that says. To get available policy conditions: https://min.io/docs/minio/linux/administration/identity-access-management/policy-based-access-control.html.

@@ -3,8 +3,8 @@ from botocore.client import Config
 
 # MinIO settings
 minio_endpoint = "http://localhost:9000"
-access_key = "test"
-secret_key = "testtest"
+access_key = "minioadmin"
+secret_key = "minioadmin"
 bucket_name = "test"
 object_name = "coucou.txt"
 file_path = "./coucou.txt"
