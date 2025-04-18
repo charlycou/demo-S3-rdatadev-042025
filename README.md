@@ -69,7 +69,7 @@ Loggin to MinIO UI : `http://localhost:9001` and create a bucket. Then upload a 
     - from your local system to a bucket,
     - or between two buckets.
 - Delete a file with the `mc rm` command.
-- Delete a bucket with the `mc  command.
+- Delete a bucket with the `mc rb`  command.
 
 Check out the full capabilities of the mc client commands here: https://min.io/docs/minio/linux/reference/minio-mc/mc-rm.html
 
