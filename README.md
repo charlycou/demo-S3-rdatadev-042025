@@ -15,7 +15,7 @@ Reference : https://min.io/docs/minio/container/index.html
 
 Create local volume to mount the data locally and install Minio using docker inline or using Dockerfile.yml
 
-````bash
+```bash
 mkdir -p ~/minio/data
 ```
 
